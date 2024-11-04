@@ -17,7 +17,7 @@ uintptr_t decrypt_client_info()
         rbx >>= 0x3A;           //shr rbx, 0x3A
         rax = _rotl64(rax, 0x10);               //rol rax, 0x10
         rbx ^= rcx;             //xor rbx, rcx
-        rax ^= IO_READ_MEM<uintptr_t>(base + 0xC80557C);            //xor rax, [0x0000000009D6C458]
+        rax ^= IO_READ_MEM<uintptr_t>(base + 0xC7F05FC);            //xor rax, [0x0000000009D6C458]
         rax = _byteswap_uint64(rax);            //bswap rax
         rbx *= IO_READ_MEM<uintptr_t>(rax + 0x15);              //imul rbx, [rax+0x15]
         rax = 0xD67810518E7F25DD;               //mov rax, 0xD67810518E7F25DD
