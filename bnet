@@ -2,7 +2,7 @@ uintptr_t decrypt_client_info()
 {
         const uint64_t mb = base;
         uint64_t rax = mb, rbx = mb, rcx = mb, rdx = mb, rdi = mb, rsi = mb, r8 = mb, r9 = mb, r10 = mb, r11 = mb, r12 = mb, r13 = mb, r14 = mb, r15 = mb;
-        rbx = IO_READ_MEM<uintptr_t>(base + 0x13C9A258);
+        rbx = IO_READ_MEM<uintptr_t>(base + 0x13C13178);
         if(!rbx)
                 return rbx;
         rcx = peb;          //mov rcx, gs:[rax]
@@ -17,7 +17,7 @@ uintptr_t decrypt_client_info()
         rbx >>= 0x3A;           //shr rbx, 0x3A
         rax = _rotl64(rax, 0x10);               //rol rax, 0x10
         rbx ^= rcx;             //xor rbx, rcx
-        rax ^= IO_READ_MEM<uintptr_t>(base + 0xCC52A1C);            //xor rax, [0x000000000A112A68]
+        rax ^= IO_READ_MEM<uintptr_t>(base + 0xCBD6F6C);            //xor rax, [0x000000000A112A68]
         rax = _byteswap_uint64(rax);            //bswap rax
         rbx *= IO_READ_MEM<uintptr_t>(rax + 0x15);              //imul rbx, [rax+0x15]
         rax = 0xD67810518E7F25DD;               //mov rax, 0xD67810518E7F25DD
@@ -51,7 +51,7 @@ uintptr_t decrypt_client_base()
         switch(rcx) {
         case 0:
         {
-                r10 = IO_READ_MEM<uintptr_t>(base + 0xCC52A85);             //mov r10, [0x0000000009B9D675]
+                r10 = IO_READ_MEM<uintptr_t>(base + 0xCBD6FD5);             //mov r10, [0x0000000009B9D675]
                 r13 = base + 0x16CBED5E;            //lea r13, [0x0000000013C0992B]
                 rdx = base + 0x33D36DEA;            //lea rdx, [0x0000000030C81959]
                 rax ^= r11;             //xor rax, r11
@@ -89,7 +89,7 @@ uintptr_t decrypt_client_base()
         }
         case 1:
         {
-                r9 = IO_READ_MEM<uintptr_t>(base + 0xCC52A85);              //mov r9, [0x0000000009B9D193]
+                r9 = IO_READ_MEM<uintptr_t>(base + 0xCBD6FD5);              //mov r9, [0x0000000009B9D193]
                 rcx = base;                 //lea rcx, [0xFFFFFFFFFCF4A2CB]
                 rcx += 0x4C577047;              //add rcx, 0x4C577047
                 rcx += r11;             //add rcx, r11
@@ -119,7 +119,7 @@ uintptr_t decrypt_client_base()
         }
         case 2:
         {
-                r9 = IO_READ_MEM<uintptr_t>(base + 0xCC52A85);              //mov r9, [0x0000000009B9CD1D]
+                r9 = IO_READ_MEM<uintptr_t>(base + 0xCBD6FD5);              //mov r9, [0x0000000009B9CD1D]
                 rcx = rax;              //mov rcx, rax
                 rcx >>= 0xC;            //shr rcx, 0x0C
                 rax ^= rcx;             //xor rax, rcx
@@ -154,7 +154,7 @@ uintptr_t decrypt_client_base()
         }
         case 3:
         {
-                r10 = IO_READ_MEM<uintptr_t>(base + 0xCC52A85);             //mov r10, [0x0000000009B9C7D1]
+                r10 = IO_READ_MEM<uintptr_t>(base + 0xCBD6FD5);             //mov r10, [0x0000000009B9C7D1]
                 rcx = base;                 //lea rcx, [0xFFFFFFFFFCF49A5E]
                 rax -= rcx;             //sub rax, rcx
                 rcx = base;                 //lea rcx, [0xFFFFFFFFFCF498DF]
@@ -186,7 +186,7 @@ uintptr_t decrypt_client_base()
         }
         case 4:
         {
-                r9 = IO_READ_MEM<uintptr_t>(base + 0xCC52A85);              //mov r9, [0x0000000009B9C355]
+                r9 = IO_READ_MEM<uintptr_t>(base + 0xCBD6FD5);              //mov r9, [0x0000000009B9C355]
                 rcx = 0x6B6B6FEB24A18CBC;               //mov rcx, 0x6B6B6FEB24A18CBC
                 rax ^= rcx;             //xor rax, rcx
                 rcx = 0xE26425F12DE4CEB;                //mov rcx, 0xE26425F12DE4CEB
@@ -228,7 +228,7 @@ uintptr_t decrypt_client_base()
         }
         case 5:
         {
-                r10 = IO_READ_MEM<uintptr_t>(base + 0xCC52A85);             //mov r10, [0x0000000009B9BC4F]
+                r10 = IO_READ_MEM<uintptr_t>(base + 0xCBD6FD5);             //mov r10, [0x0000000009B9BC4F]
                 rdx = 0;                //and rdx, 0xFFFFFFFFC0000000
                 rcx = r11 * 0xFFFFFFFFFFFFFFFE;                 //imul rcx, r11, 0xFFFFFFFFFFFFFFFE
                 rdx = _rotl64(rdx, 0x10);               //rol rdx, 0x10
@@ -258,7 +258,7 @@ uintptr_t decrypt_client_base()
         }
         case 6:
         {
-                r10 = IO_READ_MEM<uintptr_t>(base + 0xCC52A85);             //mov r10, [0x0000000009B9B7E3]
+                r10 = IO_READ_MEM<uintptr_t>(base + 0xCBD6FD5);             //mov r10, [0x0000000009B9B7E3]
                 rdx = base + 0x50AF1F4F;            //lea rdx, [0x000000004DA3AC25]
                 rax += r11;             //add rax, r11
                 rcx = r11;              //mov rcx, r11
@@ -288,7 +288,7 @@ uintptr_t decrypt_client_base()
         }
         case 7:
         {
-                r10 = IO_READ_MEM<uintptr_t>(base + 0xCC52A85);             //mov r10, [0x0000000009B9B2CD]
+                r10 = IO_READ_MEM<uintptr_t>(base + 0xCBD6FD5);             //mov r10, [0x0000000009B9B2CD]
                 r13 = base + 0xBEE4;                //lea r13, [0xFFFFFFFFFCF54714]
                 rcx = base;                 //lea rcx, [0xFFFFFFFFFCF484CA]
                 rax ^= rcx;             //xor rax, rcx
@@ -323,7 +323,7 @@ uintptr_t decrypt_client_base()
         }
         case 8:
         {
-                r9 = IO_READ_MEM<uintptr_t>(base + 0xCC52A85);              //mov r9, [0x0000000009B9AE7E]
+                r9 = IO_READ_MEM<uintptr_t>(base + 0xCBD6FD5);              //mov r9, [0x0000000009B9AE7E]
                 rcx = rax;              //mov rcx, rax
                 rcx >>= 0x1E;           //shr rcx, 0x1E
                 rax ^= rcx;             //xor rax, rcx
@@ -362,7 +362,7 @@ uintptr_t decrypt_client_base()
         }
         case 9:
         {
-                r10 = IO_READ_MEM<uintptr_t>(base + 0xCC52A85);             //mov r10, [0x0000000009B9A7BB]
+                r10 = IO_READ_MEM<uintptr_t>(base + 0xCBD6FD5);             //mov r10, [0x0000000009B9A7BB]
                 rdx = r11;              //mov rdx, r11
                 rcx = base + 0xFCE2;                //lea rcx, [0xFFFFFFFFFCF5785E]
                 rdx *= rcx;             //imul rdx, rcx
@@ -401,7 +401,7 @@ uintptr_t decrypt_client_base()
         }
         case 10:
         {
-                r10 = IO_READ_MEM<uintptr_t>(base + 0xCC52A85);             //mov r10, [0x0000000009B9A289]
+                r10 = IO_READ_MEM<uintptr_t>(base + 0xCBD6FD5);             //mov r10, [0x0000000009B9A289]
                 rcx = base + 0x240D8AB0;            //lea rcx, [0x000000002102014B]
                 rcx += r11;             //add rcx, r11
                 rax ^= rcx;             //xor rax, rcx
@@ -432,7 +432,7 @@ uintptr_t decrypt_client_base()
         }
         case 11:
         {
-                r10 = IO_READ_MEM<uintptr_t>(base + 0xCC52A85);             //mov r10, [0x0000000009B99DA2]
+                r10 = IO_READ_MEM<uintptr_t>(base + 0xCBD6FD5);             //mov r10, [0x0000000009B99DA2]
                 rcx = rax;              //mov rcx, rax
                 rcx >>= 0x15;           //shr rcx, 0x15
                 rax ^= rcx;             //xor rax, rcx
@@ -479,7 +479,7 @@ uintptr_t decrypt_client_base()
         }
         case 12:
         {
-                r10 = IO_READ_MEM<uintptr_t>(base + 0xCC52A85);             //mov r10, [0x0000000009B99823]
+                r10 = IO_READ_MEM<uintptr_t>(base + 0xCBD6FD5);             //mov r10, [0x0000000009B99823]
                 r13 = base + 0x852;                 //lea r13, [0xFFFFFFFFFCF475DD]
                 rcx = 0xF7D4FABCE6FC022;                //mov rcx, 0xF7D4FABCE6FC022
                 rax += rcx;             //add rax, rcx
@@ -505,7 +505,7 @@ uintptr_t decrypt_client_base()
         }
         case 13:
         {
-                r10 = IO_READ_MEM<uintptr_t>(base + 0xCC52A85);             //mov r10, [0x0000000009B99453]
+                r10 = IO_READ_MEM<uintptr_t>(base + 0xCBD6FD5);             //mov r10, [0x0000000009B99453]
                 r13 = base + 0x12585A59;            //lea r13, [0x000000000F4CC414]
                 rcx = r11;              //mov rcx, r11
                 rcx = ~rcx;             //not rcx
@@ -547,7 +547,7 @@ uintptr_t decrypt_client_base()
         }
         case 14:
         {
-                r10 = IO_READ_MEM<uintptr_t>(base + 0xCC52A85);             //mov r10, [0x0000000009B98ED5]
+                r10 = IO_READ_MEM<uintptr_t>(base + 0xCBD6FD5);             //mov r10, [0x0000000009B98ED5]
                 r13 = base + 0x3CF1;                //lea r13, [0xFFFFFFFFFCF4A12E]
                 rcx = rax;              //mov rcx, rax
                 rcx >>= 0x16;           //shr rcx, 0x16
@@ -577,7 +577,7 @@ uintptr_t decrypt_client_base()
         }
         case 15:
         {
-                r10 = IO_READ_MEM<uintptr_t>(base + 0xCC52A85);             //mov r10, [0x0000000009B9897C]
+                r10 = IO_READ_MEM<uintptr_t>(base + 0xCBD6FD5);             //mov r10, [0x0000000009B9897C]
                 rdx = base + 0x23AC2B6F;            //lea rdx, [0x0000000020A089AC]
                 rcx = base;                 //lea rcx, [0xFFFFFFFFFCF45CB6]
                 rax -= rcx;             //sub rax, rcx
@@ -610,7 +610,7 @@ uintptr_t decrypt_bone_base()
 {
         const uint64_t mb = base;
         uint64_t rax = mb, rbx = mb, rcx = mb, rdx = mb, rdi = mb, rsi = mb, r8 = mb, r9 = mb, r10 = mb, r11 = mb, r12 = mb, r13 = mb, r14 = mb, r15 = mb;
-        rdx = IO_READ_MEM<uintptr_t>(base + 0x1194FEF8);
+        rdx = IO_READ_MEM<uintptr_t>(base + 0x118CC758);
         if(!rdx)
                 return rdx;
         r11 = peb;          //mov r11, gs:[rax]
@@ -621,7 +621,7 @@ uintptr_t decrypt_bone_base()
         switch(rax) {
         case 0:
         {
-                r9 = IO_READ_MEM<uintptr_t>(base + 0xCC52B59);              //mov r9, [0x000000000A196389]
+                r9 = IO_READ_MEM<uintptr_t>(base + 0xCBD70A9);              //mov r9, [0x000000000A196389]
                 rax = 0;                //and rax, 0xFFFFFFFFC0000000
                 rax = _rotl64(rax, 0x10);               //rol rax, 0x10
                 rax ^= r9;              //xor rax, r9
@@ -649,7 +649,7 @@ uintptr_t decrypt_bone_base()
         }
         case 1:
         {
-                r10 = IO_READ_MEM<uintptr_t>(base + 0xCC52B59);             //mov r10, [0x000000000A195EC8]
+                r10 = IO_READ_MEM<uintptr_t>(base + 0xCBD70A9);             //mov r10, [0x000000000A195EC8]
                 rax = 0x311E3C7DD1297B69;               //mov rax, 0x311E3C7DD1297B69
                 rdx *= rax;             //imul rdx, rax
                 rcx = r11;              //mov rcx, r11
@@ -684,7 +684,7 @@ uintptr_t decrypt_bone_base()
         }
         case 2:
         {
-                r9 = IO_READ_MEM<uintptr_t>(base + 0xCC52B59);              //mov r9, [0x000000000A195A1F]
+                r9 = IO_READ_MEM<uintptr_t>(base + 0xCBD70A9);              //mov r9, [0x000000000A195A1F]
                 rax = rdx;              //mov rax, rdx
                 rax >>= 0x25;           //shr rax, 0x25
                 rdx ^= rax;             //xor rdx, rax
@@ -714,7 +714,7 @@ uintptr_t decrypt_bone_base()
         }
         case 3:
         {
-                r9 = IO_READ_MEM<uintptr_t>(base + 0xCC52B59);              //mov r9, [0x000000000A1955E3]
+                r9 = IO_READ_MEM<uintptr_t>(base + 0xCBD70A9);              //mov r9, [0x000000000A1955E3]
                 r10 = base + 0x1314A155;            //lea r10, [0x000000001068CBC7]
                 rax = 0;                //and rax, 0xFFFFFFFFC0000000
                 rax = _rotl64(rax, 0x10);               //rol rax, 0x10
@@ -741,7 +741,7 @@ uintptr_t decrypt_bone_base()
         }
         case 4:
         {
-                r10 = IO_READ_MEM<uintptr_t>(base + 0xCC52B59);             //mov r10, [0x000000000A1952EA]
+                r10 = IO_READ_MEM<uintptr_t>(base + 0xCBD70A9);             //mov r10, [0x000000000A1952EA]
                 rax = 0xF7A45523CB2EF07F;               //mov rax, 0xF7A45523CB2EF07F
                 rdx ^= rax;             //xor rdx, rax
                 rdx -= r11;             //sub rdx, r11
@@ -768,7 +768,7 @@ uintptr_t decrypt_bone_base()
         }
         case 5:
         {
-                r9 = IO_READ_MEM<uintptr_t>(base + 0xCC52B59);              //mov r9, [0x000000000A194E66]
+                r9 = IO_READ_MEM<uintptr_t>(base + 0xCBD70A9);              //mov r9, [0x000000000A194E66]
                 r13 = base + 0x12426297;            //lea r13, [0x000000000F968585]
                 rax = 0x7C5DF0A12057BE6;                //mov rax, 0x7C5DF0A12057BE6
                 rdx -= rax;             //sub rdx, rax
@@ -808,7 +808,7 @@ uintptr_t decrypt_bone_base()
         }
         case 6:
         {
-                r10 = IO_READ_MEM<uintptr_t>(base + 0xCC52B59);             //mov r10, [0x000000000A1948F9]
+                r10 = IO_READ_MEM<uintptr_t>(base + 0xCBD70A9);             //mov r10, [0x000000000A1948F9]
                 r13 = base + 0x6DA9DAD4;            //lea r13, [0x000000006AFDF85C]
                 rax = rdx;              //mov rax, rdx
                 rax >>= 0x6;            //shr rax, 0x06
@@ -848,7 +848,7 @@ uintptr_t decrypt_bone_base()
         }
         case 7:
         {
-                r10 = IO_READ_MEM<uintptr_t>(base + 0xCC52B59);             //mov r10, [0x000000000A194515]
+                r10 = IO_READ_MEM<uintptr_t>(base + 0xCBD70A9);             //mov r10, [0x000000000A194515]
                 rdx ^= r11;             //xor rdx, r11
                 rax = rdx;              //mov rax, rdx
                 rax >>= 0xD;            //shr rax, 0x0D
@@ -890,7 +890,7 @@ uintptr_t decrypt_bone_base()
         }
         case 8:
         {
-                r10 = IO_READ_MEM<uintptr_t>(base + 0xCC52B59);             //mov r10, [0x000000000A194088]
+                r10 = IO_READ_MEM<uintptr_t>(base + 0xCBD70A9);             //mov r10, [0x000000000A194088]
                 r13 = base + 0x7D814959;            //lea r13, [0x000000007AD55E75]
                 rdx -= r11;             //sub rdx, r11
                 rax = 0xEDC13D6B57B6E285;               //mov rax, 0xEDC13D6B57B6E285
@@ -914,7 +914,7 @@ uintptr_t decrypt_bone_base()
         }
         case 9:
         {
-                r9 = IO_READ_MEM<uintptr_t>(base + 0xCC52B59);              //mov r9, [0x000000000A193D5A]
+                r9 = IO_READ_MEM<uintptr_t>(base + 0xCBD70A9);              //mov r9, [0x000000000A193D5A]
                 rax = rdx;              //mov rax, rdx
                 rax >>= 0xB;            //shr rax, 0x0B
                 rdx ^= rax;             //xor rdx, rax
@@ -952,7 +952,7 @@ uintptr_t decrypt_bone_base()
         }
         case 10:
         {
-                r10 = IO_READ_MEM<uintptr_t>(base + 0xCC52B59);             //mov r10, [0x000000000A19385F]
+                r10 = IO_READ_MEM<uintptr_t>(base + 0xCBD70A9);             //mov r10, [0x000000000A19385F]
                 rax = base;                 //lea rax, [0xFFFFFFFFFD540BA2]
                 rdx -= rax;             //sub rdx, rax
                 rcx = rdx;              //mov rcx, rdx
@@ -980,7 +980,7 @@ uintptr_t decrypt_bone_base()
         }
         case 11:
         {
-                r10 = IO_READ_MEM<uintptr_t>(base + 0xCC52B59);             //mov r10, [0x000000000A1933A3]
+                r10 = IO_READ_MEM<uintptr_t>(base + 0xCBD70A9);             //mov r10, [0x000000000A1933A3]
                 rcx = 0;                //and rcx, 0xFFFFFFFFC0000000
                 rax = base + 0x1E13DCA3;            //lea rax, [0x000000001B67E13A]
                 rax = ~rax;             //not rax
@@ -1017,7 +1017,7 @@ uintptr_t decrypt_bone_base()
         }
         case 12:
         {
-                r9 = IO_READ_MEM<uintptr_t>(base + 0xCC52B59);              //mov r9, [0x000000000A192F62]
+                r9 = IO_READ_MEM<uintptr_t>(base + 0xCBD70A9);              //mov r9, [0x000000000A192F62]
                 rax = 0;                //and rax, 0xFFFFFFFFC0000000
                 rax = _rotl64(rax, 0x10);               //rol rax, 0x10
                 rax ^= r9;              //xor rax, r9
@@ -1040,7 +1040,7 @@ uintptr_t decrypt_bone_base()
         }
         case 13:
         {
-                r10 = IO_READ_MEM<uintptr_t>(base + 0xCC52B59);             //mov r10, [0x000000000A192AE3]
+                r10 = IO_READ_MEM<uintptr_t>(base + 0xCBD70A9);             //mov r10, [0x000000000A192AE3]
                 rax = rdx;              //mov rax, rdx
                 rax >>= 0xE;            //shr rax, 0x0E
                 rdx ^= rax;             //xor rdx, rax
@@ -1074,7 +1074,7 @@ uintptr_t decrypt_bone_base()
         }
         case 14:
         {
-                r10 = IO_READ_MEM<uintptr_t>(base + 0xCC52B59);             //mov r10, [0x000000000A192563]
+                r10 = IO_READ_MEM<uintptr_t>(base + 0xCBD70A9);             //mov r10, [0x000000000A192563]
                 rax = rdx;              //mov rax, rdx
                 rax >>= 0x1C;           //shr rax, 0x1C
                 rdx ^= rax;             //xor rdx, rax
@@ -1108,7 +1108,7 @@ uintptr_t decrypt_bone_base()
         }
         case 15:
         {
-                r10 = IO_READ_MEM<uintptr_t>(base + 0xCC52B59);             //mov r10, [0x000000000A1920F2]
+                r10 = IO_READ_MEM<uintptr_t>(base + 0xCBD70A9);             //mov r10, [0x000000000A1920F2]
                 rax = rdx;              //mov rax, rdx
                 rax >>= 0x25;           //shr rax, 0x25
                 rdx ^= rax;             //xor rdx, rax
@@ -1172,7 +1172,7 @@ uint16_t get_bone_index(uint32_t bone_index)
         rcx = r8 + r8 * 4;              //lea rcx, [r8+r8*4]
         rcx <<= 0x3;            //shl rcx, 0x03
         rcx -= rax;             //sub rcx, rax
-        rax = IO_READ_MEM<uint16_t>(rcx + rdi * 1 + 0xB9E0EC0);                 //movzx eax, word ptr [rcx+rdi*1+0xB9E0EC0]
+        rax = IO_READ_MEM<uint16_t>(rcx + rdi * 1 + 0xB980090);                 //movzx eax, word ptr [rcx+rdi*1+0xB9E0EC0]
         r8 = rax * 0x13C8;              //imul r8, rax, 0x13C8
         rax = r10;              //mov rax, r10
         rax = _umul128(rax, r8, (uintptr_t*)&rdx);              //mul r8
@@ -1210,18 +1210,18 @@ uint16_t get_bone_index(uint32_t bone_index)
         rcx = r9 + r9 * 4;              //lea rcx, [r9+r9*4]
         rcx <<= 0x2;            //shl rcx, 0x02
         rcx -= rax;             //sub rcx, rax
-        r12 = IO_READ_MEM<uint16_t>(rcx + rdi * 1 + 0xB9EFAF0);                 //movsx r12d, word ptr [rcx+rdi*1+0xB9EFAF0]
+        r12 = IO_READ_MEM<uint16_t>(rcx + rdi * 1 + 0xB98ECC0);                 //movsx r12d, word ptr [rcx+rdi*1+0xB9EFAF0]
         return r12;
 }
 
-constexpr auto ref_def_ptr = 0x13D73B48;
-constexpr auto name_array = 0x13F34208;
-constexpr auto loot_ptr = 0xE36DE00;
-constexpr auto camera_base = 0x13EDED20;
+constexpr auto ref_def_ptr = 0x13CECA78;
+constexpr auto name_array = 0x13EAD068;
+constexpr auto loot_ptr = 0xE2EE270;
+constexpr auto camera_base = 0x13E57BA0;
 constexpr auto local_index = 0x82A70;
-constexpr auto game_mode = 0xCF2B138;
-constexpr auto weapon_definitions = 0x13DDDD20;
-constexpr auto distribute = 0x106E6818;
+constexpr auto game_mode = 0xCEAD048;
+constexpr auto weapon_definitions = 0x13D56BD0;
+constexpr auto distribute = 0x106650F8;
 constexpr auto visible_bit = 0x133910;
 
 constexpr auto size = 0x1DF8;
