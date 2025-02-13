@@ -5,7 +5,7 @@ namespace BO6 {
     static uint32_t name_size = 0xC8;
     static uint32_t loot_ptr = 0xCBCF8C0;
     static uint32_t camera_base = 0x1243FD70;
-    static uint32_t camera_pos = 0x1F4;
+    static uint32_t camera_pos = 0x204;
     static uint32_t local_index = 0x3F770;
     static uint32_t local_index_pos = 0x344;
     static uint32_t recoil = 0x0;
