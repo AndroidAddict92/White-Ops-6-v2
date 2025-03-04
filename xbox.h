@@ -1,22 +1,21 @@
 namespace BO6 {
-    static uint32_t refdef = 0xCB5E330;
-    static uint32_t name_array = 0xCBA7318;
+    static uint32_t refdef = 0xCB6DAE0;
+    static uint32_t name_array = 0xCBB6AC8;
     static uint32_t name_array_pos = 0x1838;
     static uint32_t name_size = 0xC8;
-    static uint32_t loot_ptr = 0xCB66CF0;
+    static uint32_t loot_ptr = 0xE323E70;
     static uint32_t loot_pos = 0x170;
     static uint32_t loot_valid = 0x124;
     static uint32_t loot_valid_supply = 0x126;
     static uint32_t loot_size = 0x1F0;
-    static uint32_t camera_base = 0xC72B430;
+    static uint32_t camera_base = 0xC73A8F0;
     static uint32_t camera_pos = 0x204;
     static uint32_t local_index = 0xAB588;
     static uint32_t local_index_pos = 0x34C;
     static uint32_t recoil = 0x7360;
-    static uint32_t game_mode = 0xB52D0C8;
-    static uint32_t weapon_definitions = 0xC8F6B90;
-    static uint32_t distribute = 0x103D2A48;
-    static uint32_t visible_offset = 0xCFE50;
+    static uint32_t game_mode = 0xB53B638;
+    static uint32_t weapon_definitions = 0xC906250;
+    static uint32_t distribute = 0x103E35A8;
     static uint32_t visible = 0xCFE50;
     static uint32_t scoreboard = 0x64A40;
     static uint32_t scoreboard_size = 0x90;
@@ -49,11 +48,10 @@ namespace BO6 {
     {
         const uint64_t mb = baseAddr;
         uint64_t rax = mb, rbx = mb, rcx = mb, rdx = mb, rdi = mb, rsi = mb, r8 = mb, r9 = mb, r10 = mb, r11 = mb, r12 = mb, r13 = mb, r14 = mb, r15 = mb;
-        rbx = driver::read<uint64_t>(baseAddr + 0xCB592D8);
+        rbx = driver::read<uint64_t>(baseAddr + 0xCB68A28);
         if (!rbx)
             return rbx;
         rcx = peb;              //mov rcx, gs:[rax]
-        //failed to trace. base: 00007FF64F6C0000 It's possibly wrong   rdx = 0000000000000000
         rbx += 0xFFFFFFFFFFFF9357;              //add rbx, 0xFFFFFFFFFFFF9357
         rcx -= rdx;             //sub rcx, rdx
         rcx += rbx;             //add rcx, rbx
@@ -65,7 +63,7 @@ namespace BO6 {
         rbx >>= 0x3A;           //shr rbx, 0x3A
         rax = _rotl64(rax, 0x10);               //rol rax, 0x10
         rbx ^= rcx;             //xor rbx, rcx
-        rax ^= driver::read<uint64_t>(baseAddr + 0xB3491DC);            //xor rax, [0x00000000088BE543]
+        rax ^= driver::read<uint64_t>(baseAddr + 0xB35626C);            //xor rax, [0x00000000088E3D03]
         rax = _byteswap_uint64(rax);            //bswap rax
         rbx *= driver::read<uint64_t>(rax + 0x15);              //imul rbx, [rax+0x15]
         rax = 0xD67810518E7F25DD;               //mov rax, 0xD67810518E7F25DD
@@ -93,6 +91,8 @@ namespace BO6 {
         if (!rax)
             return rax;
         r11 = ~peb;              //mov r11, gs:[rcx]
+        //failed to translate: mov [rsp+0x138], r12
+        //failed to translate: mov [rsp+0x138], r12
         rcx = r11;              //mov rcx, r11
         rcx = _rotl64(rcx, 0x34);               //rol rcx, 0x34
         //failed to translate: mov [rsp+0x100], r13
@@ -100,10 +100,10 @@ namespace BO6 {
         switch (rcx) {
         case 0:
         {
-            r10 = driver::read<uint64_t>(baseAddr + 0xB349245);             //mov r10, [0x00000000088C3A19]
-            r13 = baseAddr + 0xDD05;                //lea r13, [0xFFFFFFFFFD5884D2]
-            r12 = baseAddr + 0x33D36DEA;            //lea r12, [0x00000000312B159B]
-            r15 = baseAddr + 0x16CBED5E;            //lea r15, [0x0000000014239503]
+            r10 = driver::read<uint64_t>(baseAddr + 0xB3562D5);             //mov r10, [0x00000000088E91D9]
+            r13 = baseAddr + 0xDD05;                //lea r13, [0xFFFFFFFFFD5A0C02]
+            r12 = baseAddr + 0x33D36DEA;            //lea r12, [0x00000000312C9CCB]
+            r15 = baseAddr + 0x16CBED5E;            //lea r15, [0x0000000014251C33]
             rax ^= r11;             //xor rax, r11
             rax ^= r12;             //xor rax, r12
             rcx = r11;              //mov rcx, r11
@@ -131,14 +131,14 @@ namespace BO6 {
             rcx = rax;              //mov rcx, rax
             rcx >>= 0x3C;           //shr rcx, 0x3C
             rax ^= rcx;             //xor rax, rcx
-            rcx = baseAddr;                 //lea rcx, [0xFFFFFFFFFD57A586]
+            rcx = baseAddr;                 //lea rcx, [0xFFFFFFFFFD592CB6]
             rax -= rcx;             //sub rax, rcx
             return rax;
         }
         case 1:
         {
-            r9 = driver::read<uint64_t>(baseAddr + 0xB349245);              //mov r9, [0x00000000088C354C]
-            rcx = baseAddr;                 //lea rcx, [0xFFFFFFFFFD579ECD]
+            r9 = driver::read<uint64_t>(baseAddr + 0xB3562D5);              //mov r9, [0x00000000088E8D0C]
+            rcx = baseAddr;                 //lea rcx, [0xFFFFFFFFFD5925FD]
             rcx += 0x4C577047;              //add rcx, 0x4C577047
             rcx += r11;             //add rcx, r11
             rax ^= rcx;             //xor rax, rcx
@@ -148,9 +148,9 @@ namespace BO6 {
             rcx = rax;              //mov rcx, rax
             rcx >>= 0x2C;           //shr rcx, 0x2C
             rax ^= rcx;             //xor rax, rcx
-            rcx = baseAddr;                 //lea rcx, [0xFFFFFFFFFD579FD2]
+            rcx = baseAddr;                 //lea rcx, [0xFFFFFFFFFD592702]
             rax ^= rcx;             //xor rax, rcx
-            rcx = baseAddr;                 //lea rcx, [0xFFFFFFFFFD57A09A]
+            rcx = baseAddr;                 //lea rcx, [0xFFFFFFFFFD5927CA]
             rcx += 0x673BCC74;              //add rcx, 0x673BCC74
             rcx += r11;             //add rcx, r11
             rax ^= rcx;             //xor rax, rcx
@@ -167,7 +167,7 @@ namespace BO6 {
         }
         case 2:
         {
-            r9 = driver::read<uint64_t>(baseAddr + 0xB349245);              //mov r9, [0x00000000088C30DF]
+            r9 = driver::read<uint64_t>(baseAddr + 0xB3562D5);              //mov r9, [0x00000000088E889F]
             rcx = rax;              //mov rcx, rax
             rcx >>= 0xC;            //shr rcx, 0x0C
             rax ^= rcx;             //xor rax, rcx
@@ -183,14 +183,14 @@ namespace BO6 {
             rcx ^= r9;              //xor rcx, r9
             rcx = ~rcx;             //not rcx
             rax *= driver::read<uint64_t>(rcx + 0x7);               //imul rax, [rcx+0x07]
-            rcx = baseAddr + 0x40BA9587;            //lea rcx, [0x000000003E1232AC]
+            rcx = baseAddr + 0x40BA9587;            //lea rcx, [0x000000003E13B9DC]
             rax += r11;             //add rax, r11
             rax += rcx;             //add rax, rcx
             rcx = 0xB820512AEEAE20F1;               //mov rcx, 0xB820512AEEAE20F1
             rax *= rcx;             //imul rax, rcx
             rcx = 0x5B4702F448FEE148;               //mov rcx, 0x5B4702F448FEE148
             rax ^= rcx;             //xor rax, rcx
-            rcx = baseAddr;                 //lea rcx, [0xFFFFFFFFFD579CFD]
+            rcx = baseAddr;                 //lea rcx, [0xFFFFFFFFFD59242D]
             rax += rcx;             //add rax, rcx
             rcx = rax;              //mov rcx, rax
             rcx >>= 0x12;           //shr rcx, 0x12
@@ -202,10 +202,10 @@ namespace BO6 {
         }
         case 3:
         {
-            r10 = driver::read<uint64_t>(baseAddr + 0xB349245);             //mov r10, [0x00000000088C2B99]
-            rcx = baseAddr;                 //lea rcx, [0xFFFFFFFFFD579669]
+            r10 = driver::read<uint64_t>(baseAddr + 0xB3562D5);             //mov r10, [0x00000000088E8359]
+            rcx = baseAddr;                 //lea rcx, [0xFFFFFFFFFD591D99]
             rax -= rcx;             //sub rax, rcx
-            rcx = baseAddr;                 //lea rcx, [0xFFFFFFFFFD5794EB]
+            rcx = baseAddr;                 //lea rcx, [0xFFFFFFFFFD591C1B]
             rax ^= rcx;             //xor rax, rcx
             rcx = rax;              //mov rcx, rax
             rcx >>= 0x13;           //shr rcx, 0x13
@@ -221,7 +221,7 @@ namespace BO6 {
             rcx = r11;              //mov rcx, r11
             rcx = ~rcx;             //not rcx
             uintptr_t RSP_0x50;
-            RSP_0x50 = baseAddr + 0x639AA956;               //lea rcx, [0x0000000060F2424A] : RSP+0x50
+            RSP_0x50 = baseAddr + 0x639AA956;               //lea rcx, [0x0000000060F3C97A] : RSP+0x50
             rcx += RSP_0x50;                //add rcx, [rsp+0x50]
             rax ^= rcx;             //xor rax, rcx
             rcx = 0xEF7AA6541B0960DD;               //mov rcx, 0xEF7AA6541B0960DD
@@ -234,7 +234,7 @@ namespace BO6 {
         }
         case 4:
         {
-            r9 = driver::read<uint64_t>(baseAddr + 0xB349245);              //mov r9, [0x00000000088C2721]
+            r9 = driver::read<uint64_t>(baseAddr + 0xB3562D5);              //mov r9, [0x00000000088E7EE1]
             rcx = 0x6B6B6FEB24A18CBC;               //mov rcx, 0x6B6B6FEB24A18CBC
             rax ^= rcx;             //xor rax, rcx
             rcx = 0xE26425F12DE4CEB;                //mov rcx, 0xE26425F12DE4CEB
@@ -276,13 +276,13 @@ namespace BO6 {
         }
         case 5:
         {
-            r10 = driver::read<uint64_t>(baseAddr + 0xB349245);             //mov r10, [0x00000000088C202B]
+            r10 = driver::read<uint64_t>(baseAddr + 0xB3562D5);             //mov r10, [0x00000000088E77EB]
             rdx = 0;                //and rdx, 0xFFFFFFFFC0000000
             rcx = r11 * 0xFFFFFFFFFFFFFFFE;                 //imul rcx, r11, 0xFFFFFFFFFFFFFFFE
             rdx = _rotl64(rdx, 0x10);               //rol rdx, 0x10
             rax += rcx;             //add rax, rcx
             rdx ^= r10;             //xor rdx, r10
-            rcx = baseAddr + 0x5F737FAA;            //lea rcx, [0x000000005CCB0B0A]
+            rcx = baseAddr + 0x5F737FAA;            //lea rcx, [0x000000005CCC923A]
             rdx = ~rdx;             //not rdx
             rax += rcx;             //add rax, rcx
             rax *= driver::read<uint64_t>(rdx + 0x7);               //imul rax, [rdx+0x07]
@@ -292,7 +292,7 @@ namespace BO6 {
             rcx = rax;              //mov rcx, rax
             rcx >>= 0x32;           //shr rcx, 0x32
             rax ^= rcx;             //xor rax, rcx
-            rcx = baseAddr;                 //lea rcx, [0xFFFFFFFFFD5789E9]
+            rcx = baseAddr;                 //lea rcx, [0xFFFFFFFFFD591119]
             rcx += 0x6987CC3C;              //add rcx, 0x6987CC3C
             rcx += r11;             //add rcx, r11
             rax += rcx;             //add rax, rcx
@@ -306,8 +306,8 @@ namespace BO6 {
         }
         case 6:
         {
-            r10 = driver::read<uint64_t>(baseAddr + 0xB349245);             //mov r10, [0x00000000088C1BCC]
-            r12 = baseAddr + 0x50AF1F4F;            //lea r12, [0x000000004E06A8C3]
+            r10 = driver::read<uint64_t>(baseAddr + 0xB3562D5);             //mov r10, [0x00000000088E738C]
+            r12 = baseAddr + 0x50AF1F4F;            //lea r12, [0x000000004E082FF3]
             rax += r11;             //add rax, r11
             rcx = r11;              //mov rcx, r11
             rcx ^= r12;             //xor rcx, r12
@@ -317,7 +317,7 @@ namespace BO6 {
             rcx = 0xE15A50F0F0B4D5D9;               //mov rcx, 0xE15A50F0F0B4D5D9
             rax *= rcx;             //imul rax, rcx
             rdx = 0;                //and rdx, 0xFFFFFFFFC0000000
-            rcx = baseAddr + 0xEE8B;                //lea rcx, [0xFFFFFFFFFD5873F9]
+            rcx = baseAddr + 0xEE8B;                //lea rcx, [0xFFFFFFFFFD59FB29]
             rdx = _rotl64(rdx, 0x10);               //rol rdx, 0x10
             rcx -= r11;             //sub rcx, r11
             rax ^= rcx;             //xor rax, rcx
@@ -336,9 +336,9 @@ namespace BO6 {
         }
         case 7:
         {
-            r10 = driver::read<uint64_t>(baseAddr + 0xB349245);             //mov r10, [0x00000000088C16BB]
-            r15 = baseAddr + 0xBEE4;                //lea r15, [0xFFFFFFFFFD584342]
-            rcx = baseAddr;                 //lea rcx, [0xFFFFFFFFFD578105]
+            r10 = driver::read<uint64_t>(baseAddr + 0xB3562D5);             //mov r10, [0x00000000088E6E7B]
+            r15 = baseAddr + 0xBEE4;                //lea r15, [0xFFFFFFFFFD59CA72]
+            rcx = baseAddr;                 //lea rcx, [0xFFFFFFFFFD590835]
             rax ^= rcx;             //xor rax, rcx
             rcx = 0x8DB3E6B3BD449D8;                //mov rcx, 0x8DB3E6B3BD449D8
             rax += rcx;             //add rax, rcx
@@ -371,7 +371,7 @@ namespace BO6 {
         }
         case 8:
         {
-            r9 = driver::read<uint64_t>(baseAddr + 0xB349245);              //mov r9, [0x00000000088C127B]
+            r9 = driver::read<uint64_t>(baseAddr + 0xB3562D5);              //mov r9, [0x00000000088E6A3B]
             rcx = rax;              //mov rcx, rax
             rcx >>= 0x1E;           //shr rcx, 0x1E
             rax ^= rcx;             //xor rax, rcx
@@ -398,7 +398,7 @@ namespace BO6 {
             rcx ^= r9;              //xor rcx, r9
             rcx = ~rcx;             //not rcx
             rax *= driver::read<uint64_t>(rcx + 0x7);               //imul rax, [rcx+0x07]
-            rcx = baseAddr;                 //lea rcx, [0xFFFFFFFFFD577B56]
+            rcx = baseAddr;                 //lea rcx, [0xFFFFFFFFFD590286]
             rax += rcx;             //add rax, rcx
             rcx = rax;              //mov rcx, rax
             rcx >>= 0x14;           //shr rcx, 0x14
@@ -410,10 +410,10 @@ namespace BO6 {
         }
         case 9:
         {
-            r10 = driver::read<uint64_t>(baseAddr + 0xB349245);             //mov r10, [0x00000000088C0BC1]
-            r12 = baseAddr + 0x6EC75C18;            //lea r12, [0x000000006C1ED581]
-            rdx = baseAddr + 0xFCE2;                //lea rdx, [0xFFFFFFFFFD5874A5]
-            rcx = baseAddr;                 //lea rcx, [0xFFFFFFFFFD5777B9]
+            r10 = driver::read<uint64_t>(baseAddr + 0xB3562D5);             //mov r10, [0x00000000088E6381]
+            r12 = baseAddr + 0x6EC75C18;            //lea r12, [0x000000006C205CB1]
+            rdx = baseAddr + 0xFCE2;                //lea rdx, [0xFFFFFFFFFD59FBD5]
+            rcx = baseAddr;                 //lea rcx, [0xFFFFFFFFFD58FEE9]
             rdx *= r11;             //imul rdx, r11
             rdx -= rcx;             //sub rdx, rcx
             rcx = r11;              //mov rcx, r11
@@ -448,12 +448,12 @@ namespace BO6 {
         }
         case 10:
         {
-            r10 = driver::read<uint64_t>(baseAddr + 0xB349245);             //mov r10, [0x00000000088C06A1]
-            r12 = baseAddr + 0x240D8AB0;            //lea r12, [0x000000002164FEF9]
-            r13 = baseAddr + 0x24E689C1;            //lea r13, [0x00000000223DFDFE]
+            r10 = driver::read<uint64_t>(baseAddr + 0xB3562D5);             //mov r10, [0x00000000088E5E61]
+            r12 = baseAddr + 0x240D8AB0;            //lea r12, [0x0000000021668629]
+            r13 = baseAddr + 0x24E689C1;            //lea r13, [0x00000000223F852E]
             rcx = r11 + r12 * 1;            //lea rcx, [r11+r12*1]
             rax ^= rcx;             //xor rax, rcx
-            rdx = baseAddr + 0x3B21;                //lea rdx, [0xFFFFFFFFFD57ABC2]
+            rdx = baseAddr + 0x3B21;                //lea rdx, [0xFFFFFFFFFD5932F2]
             rcx = r11;              //mov rcx, r11
             rdx *= r11;             //imul rdx, r11
             rcx = ~rcx;             //not rcx
@@ -478,7 +478,7 @@ namespace BO6 {
         }
         case 11:
         {
-            r10 = driver::read<uint64_t>(baseAddr + 0xB349245);             //mov r10, [0x00000000088C01D0]
+            r10 = driver::read<uint64_t>(baseAddr + 0xB3562D5);             //mov r10, [0x00000000088E5990]
             rcx = rax;              //mov rcx, rax
             rcx >>= 0x15;           //shr rcx, 0x15
             rax ^= rcx;             //xor rax, rcx
@@ -489,7 +489,7 @@ namespace BO6 {
             rax *= rcx;             //imul rax, rcx
             rcx = 0x72C2AC821062ABD1;               //mov rcx, 0x72C2AC821062ABD1
             rax ^= rcx;             //xor rax, rcx
-            rcx = baseAddr;                 //lea rcx, [0xFFFFFFFFFD576A88]
+            rcx = baseAddr;                 //lea rcx, [0xFFFFFFFFFD58F1B8]
             rax -= rcx;             //sub rax, rcx
             rax += 0xFFFFFFFFFFFF4954;              //add rax, 0xFFFFFFFFFFFF4954
             rax += r11;             //add rax, r11
@@ -511,9 +511,9 @@ namespace BO6 {
             rcx = rax;              //mov rcx, rax
             rcx >>= 0x20;           //shr rcx, 0x20
             rax ^= rcx;             //xor rax, rcx
-            rcx = baseAddr;                 //lea rcx, [0xFFFFFFFFFD576E20]
+            rcx = baseAddr;                 //lea rcx, [0xFFFFFFFFFD58F550]
             rax ^= rcx;             //xor rax, rcx
-            rcx = baseAddr + 0x5B0222F4;            //lea rcx, [0x0000000058598D27]
+            rcx = baseAddr + 0x5B0222F4;            //lea rcx, [0x00000000585B1457]
             rcx *= r11;             //imul rcx, r11
             rax += rcx;             //add rax, rcx
             rcx = 0;                //and rcx, 0xFFFFFFFFC0000000
@@ -525,8 +525,8 @@ namespace BO6 {
         }
         case 12:
         {
-            r10 = driver::read<uint64_t>(baseAddr + 0xB349245);             //mov r10, [0x00000000088BFC65]
-            r15 = baseAddr + 0x852;                 //lea r15, [0xFFFFFFFFFD57725F]
+            r10 = driver::read<uint64_t>(baseAddr + 0xB3562D5);             //mov r10, [0x00000000088E5425]
+            r15 = baseAddr + 0x852;                 //lea r15, [0xFFFFFFFFFD58F98F]
             rcx = 0xF7D4FABCE6FC022;                //mov rcx, 0xF7D4FABCE6FC022
             rax += rcx;             //add rax, rcx
             rcx = 0;                //and rcx, 0xFFFFFFFFC0000000
@@ -534,7 +534,7 @@ namespace BO6 {
             rcx ^= r10;             //xor rcx, r10
             rcx = ~rcx;             //not rcx
             rax *= driver::read<uint64_t>(rcx + 0x7);               //imul rax, [rcx+0x07]
-            rcx = baseAddr;                 //lea rcx, [0xFFFFFFFFFD5767C6]
+            rcx = baseAddr;                 //lea rcx, [0xFFFFFFFFFD58EEF6]
             rax ^= rcx;             //xor rax, rcx
             rax -= rcx;             //sub rax, rcx
             rcx = 0x5C9D9DBA026E85B7;               //mov rcx, 0x5C9D9DBA026E85B7
@@ -551,8 +551,8 @@ namespace BO6 {
         }
         case 13:
         {
-            r10 = driver::read<uint64_t>(baseAddr + 0xB349245);             //mov r10, [0x00000000088BF8A5]
-            r15 = baseAddr + 0x12585A59;            //lea r15, [0x000000000FAFC0A6]
+            r10 = driver::read<uint64_t>(baseAddr + 0xB3562D5);             //mov r10, [0x00000000088E5065]
+            r15 = baseAddr + 0x12585A59;            //lea r15, [0x000000000FB147D6]
             rcx = r11;              //mov rcx, r11
             rcx = ~rcx;             //not rcx
             rcx ^= r15;             //xor rcx, r15
@@ -584,7 +584,7 @@ namespace BO6 {
             rcx -= baseAddr;                //sub rcx, [rbp-0x78] -- didn't find trace -> use base
             rcx -= 0x756FAD6E;              //sub rcx, 0x756FAD6E
             rcx ^= rax;             //xor rcx, rax
-            rax = baseAddr + 0x78217335;            //lea rax, [0x000000007578D78C]
+            rax = baseAddr + 0x78217335;            //lea rax, [0x00000000757A5EBC]
             rcx += r11;             //add rcx, r11
             rax += rcx;             //add rax, rcx
             rcx = 0xC20F4E2AD24BC517;               //mov rcx, 0xC20F4E2AD24BC517
@@ -593,8 +593,8 @@ namespace BO6 {
         }
         case 14:
         {
-            r10 = driver::read<uint64_t>(baseAddr + 0xB349245);             //mov r10, [0x00000000088BF329]
-            r15 = baseAddr + 0x3CF1;                //lea r15, [0xFFFFFFFFFD579DC2]
+            r10 = driver::read<uint64_t>(baseAddr + 0xB3562D5);             //mov r10, [0x00000000088E4AE9]
+            r15 = baseAddr + 0x3CF1;                //lea r15, [0xFFFFFFFFFD5924F2]
             rcx = rax;              //mov rcx, rax
             rcx >>= 0x16;           //shr rcx, 0x16
             rax ^= rcx;             //xor rax, rcx
@@ -615,7 +615,7 @@ namespace BO6 {
             rax *= rcx;             //imul rax, rcx
             rcx = 0x56A40B352BF2FDB7;               //mov rcx, 0x56A40B352BF2FDB7
             rax -= rcx;             //sub rax, rcx
-            rcx = baseAddr + 0x32FFEB8B;            //lea rcx, [0x0000000030574B61]
+            rcx = baseAddr + 0x32FFEB8B;            //lea rcx, [0x000000003058D291]
             rcx = ~rcx;             //not rcx
             rcx *= r11;             //imul rcx, r11
             rax += rcx;             //add rax, rcx
@@ -623,9 +623,9 @@ namespace BO6 {
         }
         case 15:
         {
-            r10 = driver::read<uint64_t>(baseAddr + 0xB349245);             //mov r10, [0x00000000088BEDD6]
-            r12 = baseAddr + 0x23AC2B6F;            //lea r12, [0x00000000210386ED]
-            rcx = baseAddr;                 //lea rcx, [0xFFFFFFFFFD575955]
+            r10 = driver::read<uint64_t>(baseAddr + 0xB3562D5);             //mov r10, [0x00000000088E4596]
+            r12 = baseAddr + 0x23AC2B6F;            //lea r12, [0x0000000021050E1D]
+            rcx = baseAddr;                 //lea rcx, [0xFFFFFFFFFD58E085]
             rax -= rcx;             //sub rax, rcx
             rax += r11;             //add rax, r11
             rdx = r12;              //mov rdx, r12
@@ -658,7 +658,7 @@ namespace BO6 {
     {
         const uint64_t mb = baseAddr;
         uint64_t rax = mb, rbx = mb, rcx = mb, rdx = mb, rdi = mb, rsi = mb, r8 = mb, r9 = mb, r10 = mb, r11 = mb, r12 = mb, r13 = mb, r14 = mb, r15 = mb;
-        rdx = driver::read<uint64_t>(baseAddr + 0x115F43D8);
+        rdx = driver::read<uint64_t>(baseAddr + 0x116060F8);
         if (!rdx)
             return rdx;
         r11 = peb;              //mov r11, gs:[rax]
@@ -669,13 +669,13 @@ namespace BO6 {
         switch (rax) {
         case 0:
         {
-            r9 = driver::read<uint64_t>(baseAddr + 0xB349319);              //mov r9, [0x0000000005382282]
+            r9 = driver::read<uint64_t>(baseAddr + 0xB3563A9);              //mov r9, [0x00000000053A7B32]
             rax = 0;                //and rax, 0xFFFFFFFFC0000000
             rax = _rotl64(rax, 0x10);               //rol rax, 0x10
             rax ^= r9;              //xor rax, r9
             rax = _byteswap_uint64(rax);            //bswap rax
             rdx *= driver::read<uint64_t>(rax + 0x11);              //imul rdx, [rax+0x11]
-            rax = baseAddr;                 //lea rax, [0xFFFFFFFFFA038C7B]
+            rax = baseAddr;                 //lea rax, [0xFFFFFFFFFA05149B]
             rdx -= rax;             //sub rdx, rax
             rax = 0xC98EF2FFB1E013D2;               //mov rax, 0xC98EF2FFB1E013D2
             rdx += 0xFFFFFFFFFFFFC795;              //add rdx, 0xFFFFFFFFFFFFC795
@@ -697,7 +697,7 @@ namespace BO6 {
         }
         case 1:
         {
-            r10 = driver::read<uint64_t>(baseAddr + 0xB349319);             //mov r10, [0x0000000005381D7D]
+            r10 = driver::read<uint64_t>(baseAddr + 0xB3563A9);             //mov r10, [0x00000000053A762D]
             rax = 0x311E3C7DD1297B69;               //mov rax, 0x311E3C7DD1297B69
             rdx *= rax;             //imul rdx, rax
             rcx = r11;              //mov rcx, r11
@@ -707,7 +707,7 @@ namespace BO6 {
             rax ^= r10;             //xor rax, r10
             rax = _byteswap_uint64(rax);            //bswap rax
             rdx *= driver::read<uint64_t>(rax + 0x11);              //imul rdx, [rax+0x11]
-            rax = baseAddr + 0x437D3D7F;            //lea rax, [0x000000003D80C623]
+            rax = baseAddr + 0x437D3D7F;            //lea rax, [0x000000003D824E43]
             rax = ~rax;             //not rax
             rcx += rax;             //add rcx, rax
             rdx ^= rcx;             //xor rdx, rcx
@@ -720,19 +720,19 @@ namespace BO6 {
             rax = rdx;              //mov rax, rdx
             rax >>= 0x26;           //shr rax, 0x26
             rdx ^= rax;             //xor rdx, rax
-            rax = baseAddr;                 //lea rax, [0xFFFFFFFFFA03886E]
+            rax = baseAddr;                 //lea rax, [0xFFFFFFFFFA05108E]
             rax += 0x3B261317;              //add rax, 0x3B261317
             rax += r11;             //add rax, r11
             rdx += rax;             //add rdx, rax
             rax = 0x85B82AEE944DCF96;               //mov rax, 0x85B82AEE944DCF96
             rdx ^= rax;             //xor rdx, rax
-            rax = baseAddr;                 //lea rax, [0xFFFFFFFFFA03897B]
+            rax = baseAddr;                 //lea rax, [0xFFFFFFFFFA05119B]
             rdx += rax;             //add rdx, rax
             return rdx;
         }
         case 2:
         {
-            r9 = driver::read<uint64_t>(baseAddr + 0xB349319);              //mov r9, [0x00000000053818B3]
+            r9 = driver::read<uint64_t>(baseAddr + 0xB3563A9);              //mov r9, [0x00000000053A7163]
             rax = rdx;              //mov rax, rdx
             rax >>= 0x25;           //shr rax, 0x25
             rdx ^= rax;             //xor rdx, rax
@@ -762,14 +762,14 @@ namespace BO6 {
         }
         case 3:
         {
-            r9 = driver::read<uint64_t>(baseAddr + 0xB349319);              //mov r9, [0x0000000005381470]
-            r10 = baseAddr + 0x1314A155;            //lea r10, [0x000000000D182294]
+            r9 = driver::read<uint64_t>(baseAddr + 0xB3563A9);              //mov r9, [0x00000000053A6D20]
+            r10 = baseAddr + 0x1314A155;            //lea r10, [0x000000000D19AAB4]
             rax = 0;                //and rax, 0xFFFFFFFFC0000000
             rax = _rotl64(rax, 0x10);               //rol rax, 0x10
             rax ^= r9;              //xor rax, r9
             rax = _byteswap_uint64(rax);            //bswap rax
             rdx *= driver::read<uint64_t>(rax + 0x11);              //imul rdx, [rax+0x11]
-            rax = baseAddr;                 //lea rax, [0xFFFFFFFFFA03805F]
+            rax = baseAddr;                 //lea rax, [0xFFFFFFFFFA05087F]
             rdx -= rax;             //sub rdx, rax
             rax = rdx;              //mov rax, rdx
             rax >>= 0x1F;           //shr rax, 0x1F
@@ -789,7 +789,7 @@ namespace BO6 {
         }
         case 4:
         {
-            r10 = driver::read<uint64_t>(baseAddr + 0xB349319);             //mov r10, [0x0000000005381171]
+            r10 = driver::read<uint64_t>(baseAddr + 0xB3563A9);             //mov r10, [0x00000000053A6A21]
             rax = 0xF7A45523CB2EF07F;               //mov rax, 0xF7A45523CB2EF07F
             rdx ^= rax;             //xor rdx, rax
             rdx -= r11;             //sub rdx, r11
@@ -806,7 +806,7 @@ namespace BO6 {
             rax ^= r10;             //xor rax, r10
             rax = _byteswap_uint64(rax);            //bswap rax
             rdx *= driver::read<uint64_t>(rax + 0x11);              //imul rdx, [rax+0x11]
-            rax = baseAddr;                 //lea rax, [0xFFFFFFFFFA037AA3]
+            rax = baseAddr;                 //lea rax, [0xFFFFFFFFFA0502C3]
             rax += 0x8F29;          //add rax, 0x8F29
             rax += r11;             //add rax, r11
             rdx ^= rax;             //xor rdx, rax
@@ -816,20 +816,20 @@ namespace BO6 {
         }
         case 5:
         {
-            r9 = driver::read<uint64_t>(baseAddr + 0xB349319);              //mov r9, [0x0000000005380CC3]
-            r12 = baseAddr + 0x12426297;            //lea r12, [0x000000000C45DC1F]
+            r9 = driver::read<uint64_t>(baseAddr + 0xB3563A9);              //mov r9, [0x00000000053A6573]
+            r12 = baseAddr + 0x12426297;            //lea r12, [0x000000000C47643F]
             rax = 0x7C5DF0A12057BE6;                //mov rax, 0x7C5DF0A12057BE6
             rdx -= rax;             //sub rdx, rax
             rax = 0x83F8FC0408B5D1AB;               //mov rax, 0x83F8FC0408B5D1AB
             rdx ^= rax;             //xor rdx, rax
-            rax = baseAddr + 0x158DE932;            //lea rax, [0x000000000F91611D]
+            rax = baseAddr + 0x158DE932;            //lea rax, [0x000000000F92E93D]
             rax = ~rax;             //not rax
             rax *= r11;             //imul rax, r11
             rdx += rax;             //add rdx, rax
             rax = r11;              //mov rax, r11
             rax *= r12;             //imul rax, r12
             rdx ^= rax;             //xor rdx, rax
-            rax = baseAddr;                 //lea rax, [0xFFFFFFFFFA037734]
+            rax = baseAddr;                 //lea rax, [0xFFFFFFFFFA04FF54]
             rax += 0x5541;          //add rax, 0x5541
             rax += r11;             //add rax, r11
             rdx += rax;             //add rdx, rax
@@ -856,8 +856,8 @@ namespace BO6 {
         }
         case 6:
         {
-            r10 = driver::read<uint64_t>(baseAddr + 0xB349319);             //mov r10, [0x0000000005380726]
-            r12 = baseAddr + 0x6DA9DAD4;            //lea r12, [0x0000000067AD4EC9]
+            r10 = driver::read<uint64_t>(baseAddr + 0xB3563A9);             //mov r10, [0x00000000053A5FD6]
+            r12 = baseAddr + 0x6DA9DAD4;            //lea r12, [0x0000000067AED6E9]
             rax = rdx;              //mov rax, rdx
             rax >>= 0x6;            //shr rax, 0x06
             rdx ^= rax;             //xor rdx, rax
@@ -875,7 +875,7 @@ namespace BO6 {
             rax = rdx;              //mov rax, rdx
             rax >>= 0x26;           //shr rax, 0x26
             rdx ^= rax;             //xor rdx, rax
-            rax = baseAddr;                 //lea rax, [0xFFFFFFFFFA037191]
+            rax = baseAddr;                 //lea rax, [0xFFFFFFFFFA04F9B1]
             rax += 0x144205B7;              //add rax, 0x144205B7
             rax += r11;             //add rax, r11
             rdx ^= rax;             //xor rdx, rax
@@ -896,8 +896,8 @@ namespace BO6 {
         }
         case 7:
         {
-            r10 = driver::read<uint64_t>(baseAddr + 0xB349319);             //mov r10, [0x0000000005380338]
-            r13 = baseAddr + 0x4354;                //lea r13, [0xFFFFFFFFFA03B360]
+            r10 = driver::read<uint64_t>(baseAddr + 0xB3563A9);             //mov r10, [0x00000000053A5BE8]
+            r13 = baseAddr + 0x4354;                //lea r13, [0xFFFFFFFFFA053B80]
             rdx ^= r11;             //xor rdx, r11
             rax = rdx;              //mov rax, rdx
             rax >>= 0xD;            //shr rax, 0x0D
@@ -937,8 +937,8 @@ namespace BO6 {
         }
         case 8:
         {
-            r10 = driver::read<uint64_t>(baseAddr + 0xB349319);             //mov r10, [0x000000000537FE9B]
-            r12 = baseAddr + 0x7D814959;            //lea r12, [0x000000007784B4C8]
+            r10 = driver::read<uint64_t>(baseAddr + 0xB3563A9);             //mov r10, [0x00000000053A574B]
+            r12 = baseAddr + 0x7D814959;            //lea r12, [0x0000000077863CE8]
             rdx -= r11;             //sub rdx, r11
             rax = 0xEDC13D6B57B6E285;               //mov rax, 0xEDC13D6B57B6E285
             rdx *= rax;             //imul rdx, rax
@@ -955,13 +955,13 @@ namespace BO6 {
             rax >>= 0x21;           //shr rax, 0x21
             rdx ^= rax;             //xor rdx, rax
             rdx += r11;             //add rdx, r11
-            rax = baseAddr;                 //lea rax, [0xFFFFFFFFFA036A12]
+            rax = baseAddr;                 //lea rax, [0xFFFFFFFFFA04F232]
             rdx ^= rax;             //xor rdx, rax
             return rdx;
         }
         case 9:
         {
-            r9 = driver::read<uint64_t>(baseAddr + 0xB349319);              //mov r9, [0x000000000537FB59]
+            r9 = driver::read<uint64_t>(baseAddr + 0xB3563A9);              //mov r9, [0x00000000053A5409]
             rax = rdx;              //mov rax, rdx
             rax >>= 0xB;            //shr rax, 0x0B
             rdx ^= rax;             //xor rdx, rax
@@ -971,7 +971,7 @@ namespace BO6 {
             rax = rdx;              //mov rax, rdx
             rax >>= 0x2C;           //shr rax, 0x2C
             rdx ^= rax;             //xor rdx, rax
-            rax = baseAddr;                 //lea rax, [0xFFFFFFFFFA0363F0]
+            rax = baseAddr;                 //lea rax, [0xFFFFFFFFFA04EC10]
             rdx ^= rax;             //xor rdx, rax
             rax = 0;                //and rax, 0xFFFFFFFFC0000000
             rax = _rotl64(rax, 0x10);               //rol rax, 0x10
@@ -999,13 +999,13 @@ namespace BO6 {
         }
         case 10:
         {
-            r10 = driver::read<uint64_t>(baseAddr + 0xB349319);             //mov r10, [0x000000000537F633]
-            rax = baseAddr;                 //lea rax, [0xFFFFFFFFFA0361A7]
+            r10 = driver::read<uint64_t>(baseAddr + 0xB3563A9);             //mov r10, [0x00000000053A4EE3]
+            rax = baseAddr;                 //lea rax, [0xFFFFFFFFFA04E9C7]
             rdx -= rax;             //sub rdx, rax
             rcx = rdx;              //mov rcx, rdx
             rcx >>= 0x27;           //shr rcx, 0x27
             rcx ^= rdx;             //xor rcx, rdx
-            rdx = baseAddr + 0x9688;                //lea rdx, [0xFFFFFFFFFA03F723]
+            rdx = baseAddr + 0x9688;                //lea rdx, [0xFFFFFFFFFA057F43]
             rdx *= r11;             //imul rdx, r11
             rdx += rcx;             //add rdx, rcx
             rax = rdx;              //mov rax, rdx
@@ -1027,9 +1027,9 @@ namespace BO6 {
         }
         case 11:
         {
-            r10 = driver::read<uint64_t>(baseAddr + 0xB349319);             //mov r10, [0x000000000537F158]
+            r10 = driver::read<uint64_t>(baseAddr + 0xB3563A9);             //mov r10, [0x00000000053A4A08]
             rcx = 0;                //and rcx, 0xFFFFFFFFC0000000
-            rax = baseAddr + 0x1E13DCA3;            //lea rax, [0x000000001817371B]
+            rax = baseAddr + 0x1E13DCA3;            //lea rax, [0x000000001818BF3B]
             rax = ~rax;             //not rax
             rcx = _rotl64(rcx, 0x10);               //rol rcx, 0x10
             rax += r11;             //add rax, r11
@@ -1037,7 +1037,7 @@ namespace BO6 {
             rdx += rax;             //add rdx, rax
             rcx = _byteswap_uint64(rcx);            //bswap rcx
             rdx *= driver::read<uint64_t>(rcx + 0x11);              //imul rdx, [rcx+0x11]
-            rax = baseAddr;                 //lea rax, [0xFFFFFFFFFA035A4A]
+            rax = baseAddr;                 //lea rax, [0xFFFFFFFFFA04E26A]
             rax += 0x9D9E;          //add rax, 0x9D9E
             rax += r11;             //add rax, r11
             rdx += rax;             //add rdx, rax
@@ -1053,7 +1053,7 @@ namespace BO6 {
             rax = rdx;              //mov rax, rdx
             rax >>= 0x11;           //shr rax, 0x11
             rdx ^= rax;             //xor rdx, rax
-            rcx = baseAddr + 0x7C2A0085;            //lea rcx, [0x00000000762D5B93]
+            rcx = baseAddr + 0x7C2A0085;            //lea rcx, [0x00000000762EE3B3]
             rcx = ~rcx;             //not rcx
             rcx *= r11;             //imul rcx, r11
             rax = rdx;              //mov rax, rdx
@@ -1064,7 +1064,7 @@ namespace BO6 {
         }
         case 12:
         {
-            r9 = driver::read<uint64_t>(baseAddr + 0xB349319);              //mov r9, [0x000000000537ED03]
+            r9 = driver::read<uint64_t>(baseAddr + 0xB3563A9);              //mov r9, [0x00000000053A45B3]
             rax = 0;                //and rax, 0xFFFFFFFFC0000000
             rax = _rotl64(rax, 0x10);               //rol rax, 0x10
             rax ^= r9;              //xor rax, r9
@@ -1087,7 +1087,7 @@ namespace BO6 {
         }
         case 13:
         {
-            r10 = driver::read<uint64_t>(baseAddr + 0xB349319);             //mov r10, [0x000000000537E86C]
+            r10 = driver::read<uint64_t>(baseAddr + 0xB3563A9);             //mov r10, [0x00000000053A411C]
             rax = rdx;              //mov rax, rdx
             rax >>= 0xE;            //shr rax, 0x0E
             rdx ^= rax;             //xor rdx, rax
@@ -1103,7 +1103,7 @@ namespace BO6 {
             rdx += r11;             //add rdx, r11
             rcx = _byteswap_uint64(rcx);            //bswap rcx
             rdx *= driver::read<uint64_t>(rcx + 0x11);              //imul rdx, [rcx+0x11]
-            rcx = baseAddr + 0x7FFA;                //lea rcx, [0xFFFFFFFFFA03D49F]
+            rcx = baseAddr + 0x7FFA;                //lea rcx, [0xFFFFFFFFFA055CBF]
             rax = 0xEA5C4AF83EEC98D;                //mov rax, 0xEA5C4AF83EEC98D
             rdx += rax;             //add rdx, rax
             rax = rcx;              //mov rax, rcx
@@ -1114,7 +1114,7 @@ namespace BO6 {
             rdx *= rax;             //imul rdx, rax
             rax = 0xCB1252FFDD097729;               //mov rax, 0xCB1252FFDD097729
             rdx *= rax;             //imul rdx, rax
-            rax = baseAddr;                 //lea rax, [0xFFFFFFFFFA03510F]
+            rax = baseAddr;                 //lea rax, [0xFFFFFFFFFA04D92F]
             rax += 0x1CFB;          //add rax, 0x1CFB
             rax += r11;             //add rax, r11
             rdx += rax;             //add rdx, rax
@@ -1122,14 +1122,14 @@ namespace BO6 {
         }
         case 14:
         {
-            r10 = driver::read<uint64_t>(baseAddr + 0xB349319);             //mov r10, [0x000000000537E2B4]
+            r10 = driver::read<uint64_t>(baseAddr + 0xB3563A9);             //mov r10, [0x00000000053A3B64]
             rax = rdx;              //mov rax, rdx
             rax >>= 0x1C;           //shr rax, 0x1C
             rdx ^= rax;             //xor rdx, rax
             rax = rdx;              //mov rax, rdx
             rax >>= 0x38;           //shr rax, 0x38
             rax ^= rdx;             //xor rax, rdx
-            rdx = baseAddr;                 //lea rdx, [0xFFFFFFFFFA034C42]
+            rdx = baseAddr;                 //lea rdx, [0xFFFFFFFFFA04D462]
             rax -= rdx;             //sub rax, rdx
             rdx = r11 + 0xffffffffd3bc8867;                 //lea rdx, [r11-0x2C437799]
             rdx += rax;             //add rdx, rax
@@ -1138,7 +1138,7 @@ namespace BO6 {
             rax ^= r10;             //xor rax, r10
             rax = _byteswap_uint64(rax);            //bswap rax
             rdx *= driver::read<uint64_t>(rax + 0x11);              //imul rdx, [rax+0x11]
-            rax = baseAddr;                 //lea rax, [0xFFFFFFFFFA034B50]
+            rax = baseAddr;                 //lea rax, [0xFFFFFFFFFA04D370]
             rdx -= rax;             //sub rdx, rax
             rax = 0x311461FA31B150C8;               //mov rax, 0x311461FA31B150C8
             rdx ^= rax;             //xor rdx, rax
@@ -1156,7 +1156,7 @@ namespace BO6 {
         }
         case 15:
         {
-            r10 = driver::read<uint64_t>(baseAddr + 0xB349319);             //mov r10, [0x000000000537DE33]
+            r10 = driver::read<uint64_t>(baseAddr + 0xB3563A9);             //mov r10, [0x00000000053A36E3]
             rax = rdx;              //mov rax, rdx
             rax >>= 0x25;           //shr rax, 0x25
             rdx ^= rax;             //xor rdx, rax
@@ -1164,7 +1164,7 @@ namespace BO6 {
             rcx = 0;                //and rcx, 0xFFFFFFFFC0000000
             rcx = _rotl64(rcx, 0x10);               //rol rcx, 0x10
             rcx ^= r10;             //xor rcx, r10
-            rax = baseAddr;                 //lea rax, [0xFFFFFFFFFA03489D]
+            rax = baseAddr;                 //lea rax, [0xFFFFFFFFFA04D0BD]
             rax += 0x953;           //add rax, 0x953
             rax += r11;             //add rax, r11
             rcx = _byteswap_uint64(rcx);            //bswap rcx
@@ -1173,7 +1173,7 @@ namespace BO6 {
             rax = 0xEDC186E4F45D82CF;               //mov rax, 0xEDC186E4F45D82CF
             rdx *= rax;             //imul rdx, rax
             rdx -= r11;             //sub rdx, r11
-            rax = baseAddr;                 //lea rax, [0xFFFFFFFFFA03479C]
+            rax = baseAddr;                 //lea rax, [0xFFFFFFFFFA04CFBC]
             rdx -= rax;             //sub rdx, rax
             rax = 0x579691DADE4159FD;               //mov rax, 0x579691DADE4159FD
             rdx *= rax;             //imul rdx, rax
@@ -1192,8 +1192,10 @@ namespace BO6 {
         uint64_t rax = mb, rbx = mb, rcx = mb, rdx = mb, rdi = mb, rsi = mb, r8 = mb, r9 = mb, r10 = mb, r11 = mb, r12 = mb, r13 = mb, r14 = mb, r15 = mb;
         rbx = bone_index;
         rcx = rbx * 0x13C8;
+        //failed to trace. base: 00007FF659790000 It's possibly wrong   rbx = 0000000000000001
+        rcx = rbx * 0x13C8;             //imul rcx, rbx, 0x13C8
         rax = 0xD8CE01BF28E39A45;               //mov rax, 0xD8CE01BF28E39A45
-        rbx = baseAddr;                 //lea rbx, [0xFFFFFFFFFD527F2E]
+        rbx = baseAddr;                 //lea rbx, [0xFFFFFFFFFD54065E]
         rax = _umul128(rax, rcx, (uintptr_t*)&rdx);             //mul rcx
         r10 = 0xB225E47EA96E19B5;               //mov r10, 0xB225E47EA96E19B5
         rdx >>= 0xD;            //shr rdx, 0x0D
@@ -1221,7 +1223,7 @@ namespace BO6 {
         rcx = r8 + r8 * 4;              //lea rcx, [r8+r8*4]
         rcx <<= 0x3;            //shl rcx, 0x03
         rcx -= rax;             //sub rcx, rax
-        rax = driver::read<uint16_t>(rcx + rbx * 1 + 0xA2F4330);                //movzx eax, word ptr [rcx+rbx*1+0xA2F4330]
+        rax = driver::read<uint16_t>(rcx + rbx * 1 + 0xA2EEF80);                //movzx eax, word ptr [rcx+rbx*1+0xA2EEF80]
         r8 = rax * 0x13C8;              //imul r8, rax, 0x13C8
         rax = r10;              //mov rax, r10
         rax = _umul128(rax, r8, (uintptr_t*)&rdx);              //mul r8
@@ -1259,7 +1261,7 @@ namespace BO6 {
         rcx = r9 + r9 * 4;              //lea rcx, [r9+r9*4]
         rcx <<= 0x2;            //shl rcx, 0x02
         rcx -= rax;             //sub rcx, rax
-        rsi = driver::read<uint16_t>(rcx + rbx * 1 + 0xA302F60);                //movsx esi, word ptr [rcx+rbx*1+0xA302F60]
+        rsi = driver::read<uint16_t>(rcx + rbx * 1 + 0xA2FDBB0);                //movsx esi, word ptr [rcx+rbx*1+0xA2FDBB0]
         return rsi;
     }
 }
