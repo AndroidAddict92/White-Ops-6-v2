@@ -22,7 +22,7 @@ namespace BO6 {
 
     namespace bone {
         static uintptr_t base_pos = 0x173DC8;
-        static uintptr_t index_struct_size = 0x1A0;
+        static uintptr_t index_struct_size = 0x1A8; // size changed
     };
 
     namespace player {
